@@ -9,5 +9,9 @@ def takeScreenshot():
     image.show()
 
 
+def hitKeyboard(key):
+    pyautogui.keyDown(key)
+
+
 if __name__ == "__main__":
     takeScreenshot()
