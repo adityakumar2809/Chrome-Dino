@@ -38,9 +38,8 @@ def drawOnImage(
 
 def isObstacleDetected(pixel_object, crop_dimensions, background_color):
     for i in range(crop_dimensions[2], crop_dimensions[0], -1):
-        for j in range(crop_dimensions[1], crop_dimensions[3]):
-            if pixel_object[i, j] != background_color:
-                return True
+        if pixel_object[i, crop_dimensions[1]] != background_color:
+            return True
     return False
 
 
@@ -71,6 +70,8 @@ if __name__ == "__main__":
             background_color = pixel_object[205, 155]
             if isObstacleDetected(pixel_object, ground_crop_dimensions, background_color):
                 hitKeyboard('up')
+                hitKeyboard('down')
                 continue
             if isObstacleDetected(pixel_object, sky_crop_dimensions, background_color):
                 hitKeyboard('up')
+                hitKeyboard('down')
