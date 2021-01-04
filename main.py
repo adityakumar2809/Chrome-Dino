@@ -46,8 +46,8 @@ def hitKeyboard(key):
 
 if __name__ == "__main__":
     debug = False
-    ground_crop_dimensions = (250, 675, 400, 700)
-    sky_crop_dimensions = (250, 585, 400, 610)
+    ground_crop_dimensions = (250, 690, 600, 700)
+    sky_crop_dimensions = (250, 620, 600, 630)
     if debug:
         image = takeScreenshot()
         drawOnImage(image, ground_crop_dimensions, sky_crop_dimensions)
