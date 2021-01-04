@@ -35,7 +35,7 @@ def isObstacleDetected(image, crop_dimensions):
     pixel_object = image.load()
     for i in range(crop_dimensions[2], crop_dimensions[0], -1):
         for j in range(crop_dimensions[1], crop_dimensions[3]):
-            if pixel_object[i, j] > 100:
+            if pixel_object[i, j] > 100 and pixel_object[i, j] < 200:
                 return True
     return False
 
