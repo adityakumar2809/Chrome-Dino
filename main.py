@@ -33,7 +33,7 @@ def drawOnImage(image, ground_crop_dimensions, sky_crop_dimensions):
 
 def isObstacleDetected(image, crop_dimensions):
     pixel_object = image.load()
-    for i in range(crop_dimensions[0], crop_dimensions[2]):
+    for i in range(crop_dimensions[2], crop_dimensions[0], -1):
         for j in range(crop_dimensions[1], crop_dimensions[3]):
             if pixel_object[i, j] > 100:
                 return True
@@ -46,8 +46,8 @@ def hitKeyboard(key):
 
 if __name__ == "__main__":
     debug = False
-    ground_crop_dimensions = (250, 650, 375, 700)
-    sky_crop_dimensions = (250, 595, 375, 645)
+    ground_crop_dimensions = (250, 675, 400, 700)
+    sky_crop_dimensions = (250, 585, 400, 610)
     if debug:
         image = takeScreenshot()
         drawOnImage(image, ground_crop_dimensions, sky_crop_dimensions)
@@ -61,4 +61,4 @@ if __name__ == "__main__":
                 hitKeyboard('up')
                 continue
             if isObstacleDetected(image, sky_crop_dimensions):
-                hitKeyboard('down')
+                hitKeyboard('up')
