@@ -75,11 +75,13 @@ if __name__ == "__main__":
         hitKeyboard('up')
 
         iterations = 0
+        base_uptime = 0.1
 
         while True:
             if(iterations % 100 == 0):
                 if x_end < screen_width-3:
                     x_end += 10
+            uptime = base_uptime - 0.000014*iterations
             iterations += 1
             image = ImageGrab.grab().convert('L')
             pixel_object = image.load()
@@ -88,7 +90,7 @@ if __name__ == "__main__":
             for i in reversed(range(x_start, x_end)):
                 if pixel_object[i, y_ground] != background_color or pixel_object[i + 20, y_sky] != background_color:
                     pyautogui.press('up')
-                    time.sleep(0.08)
+                    time.sleep(uptime)
                     pyautogui.press('down')
                     break
 
