@@ -13,7 +13,7 @@ def drawOnImage(
     image,
     ground_crop_dimensions,
     sky_crop_dimensions,
-    background_detection_dimensions
+    background_dimensions
 ):
     pixel_object = image.load()
     for i in range(ground_crop_dimensions[0], ground_crop_dimensions[2]):
@@ -25,12 +25,12 @@ def drawOnImage(
             pixel_object[i, j] = (0, 0, 255)
 
     for i in range(
-        background_detection_dimensions[0],
-        background_detection_dimensions[2]
+        background_dimensions[0],
+        background_dimensions[2]
     ):
         for j in range(
-            background_detection_dimensions[1],
-            background_detection_dimensions[3]
+            background_dimensions[1],
+            background_dimensions[3]
         ):
             pixel_object[i, j] = (0, 255, 0)
     image.show()
@@ -51,14 +51,22 @@ if __name__ == "__main__":
     debug = False
     ground_crop_dimensions = [250, 690, 600, 700]
     sky_crop_dimensions = [250, 620, 600, 630]
-    background_detection_dimensions = [200, 150, 210, 160]
+    background_dimensions = [200, 150, 210, 160]
+
+    x_start = ground_crop_dimensions[0]
+    x_end = ground_crop_dimensions[2]
+    y_ground = (ground_crop_dimensions[1] + ground_crop_dimensions[3])//2
+    y_sky = (sky_crop_dimensions[1] + sky_crop_dimensions[3])//2
+    x_background = (background_dimensions[0] + background_dimensions[2])//2
+    y_background = (background_dimensions[1] + background_dimensions[3])//2
+
     if debug:
         image = takeScreenshot()
         drawOnImage(
             image,
             ground_crop_dimensions,
             sky_crop_dimensions,
-            background_detection_dimensions
+            background_dimensions
         )
     else:
         print('Dino game commences in 3 seconds...')
@@ -67,11 +75,10 @@ if __name__ == "__main__":
         while True:
             image = ImageGrab.grab().convert('L')
             pixel_object = image.load()
-            background_color = pixel_object[205, 155]
-            if isObstacleDetected(pixel_object, ground_crop_dimensions, background_color):
-                hitKeyboard('up')
-                hitKeyboard('down')
-                continue
-            if isObstacleDetected(pixel_object, sky_crop_dimensions, background_color):
-                hitKeyboard('up')
-                hitKeyboard('down')
+            background_color = pixel_object[x_background, y_background]
+
+            for i in reversed(range(x_start, x_end)):
+                if pixel_object[i, y_ground] != background_color or pixel_object[i, y_sky] != background_color:
+                    pyautogui.press('up')
+                    break
+
