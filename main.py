@@ -88,7 +88,8 @@ if __name__ == "__main__":
             background_color = pixel_object[x_background, y_background]
 
             for i in reversed(range(x_start, x_end)):
-                if pixel_object[i, y_ground] != background_color or pixel_object[i + 20, y_sky] != background_color:
+                if pixel_object[i, y_ground] != background_color or\
+                     pixel_object[i + 20, y_sky] != background_color:
                     pyautogui.press('up')
                     time.sleep(uptime)
                     pyautogui.press('down')
