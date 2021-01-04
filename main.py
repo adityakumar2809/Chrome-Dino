@@ -49,8 +49,8 @@ def hitKeyboard(key):
 
 if __name__ == "__main__":
     debug = False
-    ground_crop_dimensions = [250, 690, 350, 700]
-    sky_crop_dimensions = [250, 620, 350, 630]
+    ground_crop_dimensions = [350, 690, 380, 700]
+    sky_crop_dimensions = [350, 620, 380, 630]
     background_dimensions = [200, 150, 210, 160]
     screen_width = 1920
 
@@ -79,14 +79,14 @@ if __name__ == "__main__":
         while True:
             if(iterations % 100 == 0):
                 if x_end < screen_width-3:
-                    x_end += 6
+                    x_end += 10
             iterations += 1
             image = ImageGrab.grab().convert('L')
             pixel_object = image.load()
             background_color = pixel_object[x_background, y_background]
 
             for i in reversed(range(x_start, x_end)):
-                if pixel_object[i, y_ground] != background_color or pixel_object[i, y_sky] != background_color:
+                if pixel_object[i, y_ground] != background_color or pixel_object[i + 20, y_sky] != background_color:
                     pyautogui.press('up')
                     time.sleep(0.08)
                     pyautogui.press('down')
