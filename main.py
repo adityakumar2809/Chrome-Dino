@@ -31,10 +31,10 @@ def drawOnImage(image, ground_crop_dimensions, sky_crop_dimensions):
     image.show()
 
 
-def isObstacleDetected(image):
+def isObstacleDetected(image, crop_dimensions):
     pixel_object = image.load()
-    for i in range(image.size[0]):
-        for j in range(image.size[1]):
+    for i in range(crop_dimensions[0], crop_dimensions[2]):
+        for j in range(crop_dimensions[1], crop_dimensions[3]):
             if pixel_object[i, j] > 100:
                 return True
     return False
@@ -56,10 +56,9 @@ if __name__ == "__main__":
         time.sleep(3)
         hitKeyboard('up')
         while True:
-            image = ImageGrab.grab(bbox=ground_crop_dimensions).convert('L')
-            if isObstacleDetected(image):
+            image = ImageGrab.grab().convert('L')
+            if isObstacleDetected(image, ground_crop_dimensions):
                 hitKeyboard('up')
                 continue
-            image = ImageGrab.grab(bbox=sky_crop_dimensions).convert('L')
-            if isObstacleDetected(image):
+            if isObstacleDetected(image, sky_crop_dimensions):
                 hitKeyboard('down')
