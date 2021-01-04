@@ -11,8 +11,8 @@ def takeScreenshot():
 
 def drawOnImage(image):
     pixel_object = image.load()
-    for i in range(300, 400):
-        for j in range(500, 800):
+    for i in range(215, 270):
+        for j in range(500, 740):
             pixel_object[i, j] = 0
     image.show()
 
