@@ -79,10 +79,10 @@ if __name__ == "__main__":
 
         while True:
             iterations += 1
-            if(iterations % 100 == 0):
-                if x_end < screen_width-10:
-                    x_end += 10
-            uptime = base_uptime - 0.0000125*iterations
+            if(iterations % 10 == 0):
+                if x_end < screen_width-1:
+                    x_end += 1
+            uptime = base_uptime - 0.000012*iterations
             image = ImageGrab.grab().convert('L')
             pixel_object = image.load()
             background_color = pixel_object[x_background, y_background]
