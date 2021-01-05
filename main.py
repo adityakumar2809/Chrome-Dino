@@ -80,7 +80,7 @@ if __name__ == "__main__":
         while True:
             iterations += 1
             if(iterations % 100 == 0):
-                if x_end < screen_width-3:
+                if x_end < screen_width-10:
                     x_end += 10
             uptime = base_uptime - 0.0000125*iterations
             image = ImageGrab.grab().convert('L')
